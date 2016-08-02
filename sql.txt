@@ -1,0 +1,59 @@
+##PRACTICE JOINS
+
+*Get all invoices and show me their invoice date, customer first and last names, and total
+
+  SELECT Invoice.InvoiceDate as InvoiceData, Invoice.Total, Customer.FirstName,
+  Customer.LastName FROM Customer Join Invoice
+  ON Invoice.CustomerId = Customer.CustomerId;
+
+*Get all customers and show me their first name, last name, and support rep first name and last name
+
+  SELECT Customer.FirstName as CustomerFirst, Customer.LastName as CustomerLast,
+  Employee.Firstname as SupportFirst, Employee.LastName as SupportLast FROM Customer
+  JOIN Employee ON Employee.EmployeeId = Customer.SupportRepId;
+
+*Get all the playlist tracks where the playlist name is Music
+
+  SELECT PlaylistTrack.TrackId, Playlist.Name as PlaylistName FROM Playlist
+  JOIN PlaylistTrack ON PlaylistTrack.PlaylistId = Playlist.PlaylistId
+  WHERE Playlist.Name = "Music";
+
+
+*Get all tracknames for playlistId 5
+
+  SELECT Track.Name FROM Track JOIN PlaylistTrack
+  ON Track.TrackId = PlaylistTrack.TrackId
+  WHERE PlaylistTrack.PlaylistId = 5;
+
+*Get all tracknames and the playlist name that they're on (two joins)
+
+  SELECT Playlist.Name as PlaylistName, Track.Name as TrackName FROM TRACK JOIN PlaylistTrack
+  ON Track.TrackId = PlaylistTrack.TrackId JOIN PlayList
+  ON PlaylistTrack.PlaylistId = Playlist.PlaylistId;
+
+*Get all tracks that are alternative and show me the track name and the album name(2 joins)
+
+  SELECT Track.Name as TrackName,
+  Album.Title as AlbumTitle, Genre.Name as Genre
+  FROM TRACK Join Album ON Album.AlbumId = Track.AlbumId Join Genre
+  ON Track.GenreId = Genre.GenreId WHERE Genre.name = 'Alternative';
+
+**Black Diamond: Get all the tracks on the playlist called Music and show their name, genre name, album name,
+and artist name (at least 5 joins)
+
+  SELECT Track.Name as Track, Genre.Name as Genre,
+  Album.Title as Album, Artist.Name as Artist FROM Track
+  JOIN PlaylistTrack ON Track.TrackId = PlaylistTrack.TrackId
+  JOIN Playlist ON PlaylistTrack.PlaylistId = Playlist.PlaylistId
+  JOIN Genre ON Track.GenreId = Genre.GenreId
+  JOIN Album ON Track.AlbumId = Album.AlbumId
+  JOIN Artist ON Album.ArtistId = Artist.ArtistId
+  WHERE Playlist.Name = 'Music';
+
+##Practice Updating Rows
+
+
+**Created orders quantity row, and multiplied the quantity by the price
+
+  SELECT Orders.quantity * Product.Price FROM Orders JOIN Product
+  ON Product.productId = Product.productId WHERE Orders.OrderId = 4;
